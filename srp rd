@@ -1,0 +1,294 @@
+# Set page configuration
+st.set_page_config(
+    page_title="GRIET Library Management System",
+    page_icon="📚",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# Custom CSS for modern and attractive styling
+st.markdown("""
+<style>
+    /* Main background and container styling */
+    .stApp {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        color: #ffffff;
+    }
+
+    /* Header styling */
+    .main-header {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 2rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .sub-header {
+        font-size: 2rem;
+        color: #64B5F6;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid #64B5F6;
+        padding-bottom: 0.5rem;
+    }
+
+    /* Card styling */
+    .card {
+        background: rgba(51, 51, 51, 0.8);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 10px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Button styling */
+    .stButton > button {
+        background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #1565C0 0%, #1976D2 100%);
+        transform: scale(1.05);
+    }
+
+    /* Input field styling */
+    .stTextInput > div > div > input,
+    .stTextArea > div > div > textarea,
+    .stNumberInput > div > div > input {
+        background-color: rgba(51, 51, 51, 0.8) !important;
+        color: white !important;
+        border: 2px solid #64B5F6 !important;
+        border-radius: 10px !important;
+        padding: 10px !important;
+    }
+
+    /* Selectbox styling */
+    .stSelectbox > div > div > div {
+        background-color: rgba(51, 51, 51, 0.8) !important;
+        color: white !important;
+        border: 2px solid #64B5F6 !important;
+        border-radius: 10px !important;
+    }
+
+    /* Tab styling */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        background: rgba(51, 51, 51, 0.8) !important;
+        color: white !important;
+        border: 2px solid #64B5F6 !important;
+        border-radius: 10px !important;
+        padding: 0.5rem 1rem !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .stTabs [data-baseweb="tab"][aria-selected="true"] {
+        background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%) !important;
+        border: none !important;
+        transform: scale(1.05);
+    }
+
+    /* Sidebar styling */
+    .css-1d391kg, .css-12oz5g7 {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+        padding: 2rem !important;
+    }
+
+    /* Success/Error message styling */
+    .stSuccess {
+        background: rgba(76, 175, 80, 0.2) !important;
+        border: 1px solid #4CAF50 !important;
+        border-radius: 10px !important;
+        padding: 1rem !important;
+    }
+
+    .stError {
+        background: rgba(244, 67, 54, 0.2) !important;
+        border: 1px solid #F44336 !important;
+        border-radius: 10px !important;
+        padding: 1rem !important;
+    }
+
+    /* Book card styling */
+    .book-card {
+        background: rgba(51, 51, 51, 0.8);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 15px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .book-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .book-card img {
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+    }
+
+    .book-card img:hover {
+        transform: scale(1.05);
+    }
+
+    /* Metric styling */
+    .stMetric {
+        background: rgba(51, 51, 51, 0.8) !important;
+        border-radius: 15px !important;
+        padding: 1rem !important;
+        border: 2px solid #64B5F6 !important;
+    }
+
+    /* Progress bar styling */
+    .stProgress > div > div > div {
+        background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%) !important;
+    }
+
+    /* Footer styling */
+    .footer {
+        text-align: center;
+        padding: 2rem;
+        color: #ffffff;
+        font-size: 0.9rem;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Main header with icon
+st.markdown('<h1 class="main-header">📚 GRIET Library Management System</h1>', unsafe_allow_html=True)
+
+if st.button("Login", key="login_btn"):
+    if login_username in st.session_state.users:
+        if verify_password(login_password, st.session_state.users[login_username]["password"]):
+            st.session_state.logged_in = True
+            st.session_state.username = login_username
+            st.session_state.is_admin = st.session_state.users[login_username].get("is_admin", False)
+            st.success("Login successful!")
+            st.rerun()
+        else:
+            st.error("Incorrect password!")
+    else:
+        st.error("User not found!")
+
+if st.button("Register", key="register_btn"):
+    if reg_username and reg_password and reg_confirm_password and reg_name:
+        if reg_password != reg_confirm_password:
+            st.error("Passwords do not match!")
+        elif reg_username in st.session_state.users:
+            st.error("Username already exists!")
+        else:
+            st.session_state.users[reg_username] = {
+                "password": hash_password(reg_password),
+                "is_admin": reg_is_admin,
+                "name": reg_name
+            }
+            save_users()
+            st.success("Registration successful! Please login.")
+    else:
+        st.error("Please fill all fields!")
+
+with st.sidebar:
+    st.markdown(f"### Welcome, {st.session_state.username}")
+    st.markdown(f"**Role:** {'Administrator' if st.session_state.is_admin else 'User'}")
+    if st.button("Logout", key="logout_btn"):
+        st.session_state.logged_in = False
+        st.session_state.username = None
+        st.session_state.is_admin = False
+        st.rerun()
+
+if st.button("Add Book", key="admin_add_book_btn"):
+    if new_title and new_author and new_price > 0 and new_quantity > 0:
+        new_book = {
+            "id": generate_book_id(),
+            "title": new_title,
+            "author": new_author,
+            "category": new_category,
+            "language": new_language,
+            "price": new_price,
+            "quantity": new_quantity,
+            "available": new_quantity,
+            "description": new_description,
+            "cover_url": ""
+        }
+
+        st.session_state.books.append(new_book)
+        save_books()
+
+        st.success(f"Book '{new_title}' added successfully!")
+    else:
+        st.error("Please fill all required fields!")
+
+if st.button("Add Category", key="add_category_btn"):
+    if new_category and new_category not in st.session_state.custom_categories:
+        st.session_state.custom_categories.append(new_category)
+        st.success(f"Category '{new_category}' added successfully!")
+
+if st.button("Remove Category", key="remove_category_btn"):
+    if category_to_remove:
+        st.session_state.custom_categories.remove(category_to_remove)
+        st.success(f"Category '{category_to_remove}' removed successfully!")
+
+if st.button("Add Language", key="add_language_btn"):
+    if new_language and new_language not in st.session_state.custom_languages:
+        st.session_state.custom_languages.append(new_language)
+        st.success(f"Language '{new_language}' added successfully!")
+
+if st.button("Remove Language", key="remove_language_btn"):
+    if language_to_remove:
+        st.session_state.custom_languages.remove(language_to_remove)
+        st.success(f"Language '{language_to_remove}' removed successfully!")
+
+if st.button("Add Author", key="add_author_btn"):
+    if new_author and new_author not in st.session_state.custom_authors:
+        st.session_state.custom_authors.append(new_author)
+        st.success(f"Author '{new_author}' added successfully!")
+
+if st.button("Remove Author", key="remove_author_btn"):
+    if author_to_remove:
+        st.session_state.custom_authors.remove(author_to_remove)
+        st.success(f"Author '{author_to_remove}' removed successfully!")
+
+if st.button("Add Book", key="popular_add_book_btn"):
+    if new_book_title and new_book_author and new_book_category and new_book_language:
+        new_book = {
+            "title": new_book_title,
+            "author": new_book_author,
+            "category": new_book_category,
+            "language": new_book_language,
+            "cover_url": ""
+        }
+        if new_book not in st.session_state.custom_books:
+            st.session_state.custom_books.append(new_book)
+            st.success(f"Book '{new_book_title}' added successfully!")
+
+if st.button("Remove Book", key="remove_popular_book_btn"):
+    if book_to_remove:
+        title = book_to_remove.split(" by ")[0]
+        st.session_state.custom_books = [b for b in st.session_state.custom_books if b['title'] != title]
+        st.success(f"Book '{title}' removed successfully!")
+
+# Footer
+st.markdown("""
+<div class="footer">
+    <p>© 2023 GRIET Library Management System | Developed with ❤️</p>
+</div>
+""", unsafe_allow_html=True) 
