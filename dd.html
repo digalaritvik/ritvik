@@ -1,0 +1,58 @@
+import * as d3 from "d3";
+import * as topojson from "topojson-client";
+
+const width = 960;
+const height = 600;
+
+const svg = d3.select("body")
+  .append("svg")
+  .attr("width", width)
+  .attr("height", height);
+
+const projection = d3.geoNaturalEarth1()
+  .scale(150)
+  .translate([width / 2, height / 2]);
+
+const path = d3.geoPath().projection(projection);
+
+const tooltip = d3.select("body")
+  .append("div")
+  .style("position", "absolute")
+  .style("background", "white")
+  .style("padding", "5px")
+  .style("border", "1px solid black")
+  .style("border-radius", "5px")
+  .style("display", "none");
+
+Promise.all([
+  d3.json("https://unpkg.com/world-atlas@2.0.2/countries-110m.json"),
+  d3.csv("population_data.csv") // CSV with 'id' (country code) and 'population' columns
+]).then(([world, populationData]) => {
+  const countries = topojson.feature(world, world.objects.countries).features;
+  const populationMap = new Map(populationData.map(d => [d.id, d.population]));
+
+  svg.selectAll(".country")
+    .data(countries)
+    .enter().append("path")
+    .attr("class", "country")
+    .attr("d", path)
+    .attr("fill", "#69b3a2")
+    .attr("stroke", "#333")
+    .on("mouseover", function(event, d) {
+      const population = populationMap.get(d.id) || "Unknown";
+      tooltip.style("display", "block")
+        .html(`<strong>Population:</strong> ${population}`)
+        .style("left", `${event.pageX + 10}px`)
+        .style("top", `${event.pageY + 10}px`);
+    })
+    .on("mousemove", function(event) {
+      tooltip.style("left", `${event.pageX + 10}px`)
+        .style("top", `${event.pageY + 10}px`);
+    })
+    .on("mouseout", function() {
+      tooltip.style("display", "none");
+    });
+});
+
+
+

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Portal - Login & Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #0d0d0d;
+            color: #0f0;
+            text-align: center;
+            overflow: hidden;
+        }
+        .binary-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: #0f0;
+            font-size: 20px;
+            font-family: monospace;
+            overflow: hidden;
+            z-index: -1;
+            white-space: nowrap;
+            animation: scrollBinary 10s linear infinite;
+        }
+        @keyframes scrollBinary {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100%); }
+        }
+        .container {
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background: rgba(17, 17, 17, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 0 10px #0f0;
+            position: relative;
+            z-index: 1;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            background: #222;
+            color: #0f0;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #0f0;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #0a0;
+        }
+        .toggle {
+            color: #0f0;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="binary-background" id="binary"></div>
+    
+    <div class="container" id="login-container">
+        <h2>Hacker Portal Login</h2>
+        <input type="text" placeholder="Username" id="login-user">
+        <input type="password" placeholder="Password" id="login-pass">
+        <button class="btn" onclick="login()">Login</button>
+        <p class="toggle" onclick="toggleForm()">New? Register here</p>
+    </div>
+    
+    <div class="container" id="register-container" style="display: none;">
+        <h2>Register</h2>
+        <input type="text" placeholder="Username" id="register-user">
+        <input type="password" placeholder="Password" id="register-pass">
+        <button class="btn" onclick="register()">Register</button>
+        <p class="toggle" onclick="toggleForm()">Already have an account? Login</p>
+    </div>
+    
+    <script>
+        function toggleForm() {
+            document.getElementById('login-container').style.display = 
+                document.getElementById('login-container').style.display === 'none' ? 'block' : 'none';
+            document.getElementById('register-container').style.display = 
+                document.getElementById('register-container').style.display === 'none' ? 'block' : 'none';
+        }
+        function login() {
+            alert('Logging in...');
+        }
+        function register() {
+            alert('Registering user...');
+        }
+        
+        // Generate binary background effect
+        function generateBinary() {
+            let binary = "";
+            for (let i = 0; i < 1000; i++) {
+                binary += Math.round(Math.random()) + " ";
+                if (i % 50 === 0) binary += "<br>";
+            }
+            document.getElementById("binary").innerHTML = binary;
+            setTimeout(generateBinary, 100);
+        }
+        generateBinary();
+    </script>
+</body>
+</html>
