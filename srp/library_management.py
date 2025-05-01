@@ -289,7 +289,7 @@ POPULAR_BOOKS = [
         "author": "Harper Lee",
         "category": "Fiction",
         "language": "English",
-        "price": 1078.00,  # 12.99 USD * 83
+        "price": 499.00,  # Updated to realistic Indian price
         "cover_url": "https://m.media-amazon.com/images/I/71FxgtFKcQL._AC_UF1000,1000_QL80_.jpg"
     },
     {
@@ -297,7 +297,7 @@ POPULAR_BOOKS = [
         "author": "George Orwell",
         "category": "Fiction",
         "language": "English",
-        "price": 912.00,  # 10.99 USD * 83
+        "price": 399.00,  # Updated to realistic Indian price
         "cover_url": "https://m.media-amazon.com/images/I/71kxa1-0mfL._AC_UF1000,1000_QL80_.jpg"
     },
     {
@@ -305,7 +305,7 @@ POPULAR_BOOKS = [
         "author": "Paulo Coelho",
         "category": "Fiction",
         "language": "English",
-        "price": 995.00,  # 11.99 USD * 83
+        "price": 299.00,  # Updated to realistic Indian price
         "cover_url": "https://m.media-amazon.com/images/I/71aFt4+OTOL._AC_UF1000,1000_QL80_.jpg"
     },
     {
@@ -313,7 +313,7 @@ POPULAR_BOOKS = [
         "author": "Stephen Hawking",
         "category": "Science",
         "language": "English",
-        "price": 1244.00,  # 14.99 USD * 83
+        "price": 599.00,  # Updated to realistic Indian price
         "cover_url": "https://m.media-amazon.com/images/I/A1xkFZX5k-L._AC_UF1000,1000_QL80_.jpg"
     },
     {
@@ -321,7 +321,7 @@ POPULAR_BOOKS = [
         "author": "Charles Duhigg",
         "category": "Psychology",
         "language": "English",
-        "price": 1161.00,  # 13.99 USD * 83
+        "price": 449.00,  # Updated to realistic Indian price
         "cover_url": "https://m.media-amazon.com/images/I/71QKQ9mwV7L._AC_UF1000,1000_QL80_.jpg"
     },
     {
@@ -329,7 +329,7 @@ POPULAR_BOOKS = [
         "author": "APJ Abdul Kalam",
         "category": "Biography",
         "language": "English",
-        "price": 829.00,  # 9.99 USD * 83
+        "price": 249.00,  # Updated to realistic Indian price
         "cover_url": "https://m.media-amazon.com/images/I/71KKZlVjbwL._AC_UF1000,1000_QL80_.jpg"
     },
     {
@@ -337,7 +337,7 @@ POPULAR_BOOKS = [
         "author": "Peter Thiel",
         "category": "Business",
         "language": "English",
-        "price": 1327.00,  # 15.99 USD * 83
+        "price": 549.00,  # Updated to realistic Indian price
         "cover_url": "https://m.media-amazon.com/images/I/71m-MxdJ2WL._AC_UF1000,1000_QL80_.jpg"
     },
     {
@@ -345,7 +345,7 @@ POPULAR_BOOKS = [
         "author": "Yuval Noah Harari",
         "category": "History",
         "language": "English",
-        "price": 1410.00,  # 16.99 USD * 83
+        "price": 699.00,  # Updated to realistic Indian price
         "cover_url": "https://m.media-amazon.com/images/I/71N3-FFSDxL._AC_UF1000,1000_QL80_.jpg"
     },
     {
@@ -353,7 +353,7 @@ POPULAR_BOOKS = [
         "author": "Sun Tzu",
         "category": "Philosophy",
         "language": "English",
-        "price": 746.00,  # 8.99 USD * 83
+        "price": 199.00,  # Updated to realistic Indian price
         "cover_url": "https://m.media-amazon.com/images/I/71KM8RhcgbL._AC_UF1000,1000_QL80_.jpg"
     },
     {
@@ -361,7 +361,7 @@ POPULAR_BOOKS = [
         "author": "Robert C. Martin",
         "category": "Technology",
         "language": "English",
-        "price": 1659.00,  # 19.99 USD * 83
+        "price": 799.00,  # Updated to realistic Indian price
         "cover_url": "https://m.media-amazon.com/images/I/41xShlnTZTL._AC_UF1000,1000_QL80_.jpg"
     }
 ]
@@ -376,13 +376,14 @@ if 'custom_authors' not in st.session_state:
 if 'custom_books' not in st.session_state:
     st.session_state.custom_books = POPULAR_BOOKS.copy()
 
+# Update price ranges for Indian market
 PRICE_RANGES = [
-    (0, 10, "Under $10"),
-    (10, 20, "$10 - $20"),
-    (20, 30, "$20 - $30"),
-    (30, 50, "$30 - $50"),
-    (50, 100, "$50 - $100"),
-    (100, float('inf'), "Over $100")
+    (0, 200, "Under ₹200"),
+    (200, 400, "₹200 - ₹400"),
+    (400, 600, "₹400 - ₹600"),
+    (600, 800, "₹600 - ₹800"),
+    (800, 1000, "₹800 - ₹1000"),
+    (1000, float('inf'), "Over ₹1000")
 ]
 
 # Helper functions
